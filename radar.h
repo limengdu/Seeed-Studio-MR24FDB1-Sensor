@@ -1,11 +1,10 @@
 #ifndef _RADAR_H__
 #define _RADAR_H__
 
-//导入Arduino核心头文件
 #include"Arduino.h"  
 
 class radar
-{  //public中声明的函数和变量可以被外部程序所访问，而private中声明的函数和变量，只能从这个类的内部访问。
+{
     private:
         
     public:

@@ -1,26 +1,26 @@
 #include "Arduino.h"
 #include "radar.h"
 
-#define MESSAGE_HEAD 0x55       //数据包头帧
-#define ACTIVE_REPORT 0x04      //主动上报
-#define FALL_REPORT 0x06        //跌倒数据上报
+#define MESSAGE_HEAD 0x55
+#define ACTIVE_REPORT 0x04
+#define FALL_REPORT 0x06
 
-#define REPORT_RADAR 0x03       //命令：上报雷达
-#define REPORT_OTHER 0x05       //命令：上报其他
+#define REPORT_RADAR 0x03
+#define REPORT_OTHER 0x05
 
-#define HEARTBEAT 0x01          //心跳包
-#define ABNOEMAL 0x02           //异常复位
-#define ENVIRONMENT 0x05        //环境
-#define BODYSIGN 0x06           //体征
-#define CLOSE_AWAY 0x07         //接近远离
+#define HEARTBEAT 0x01
+#define ABNOEMAL 0x02
+#define ENVIRONMENT 0x05
+#define BODYSIGN 0x06
+#define CLOSE_AWAY 0x07
 
-#define CA_BE 0x01              //数据包：接近远离
+#define CA_BE 0x01
 #define CA_CLOSE 0x02
 #define CA_AWAY 0x03
 #define SOMEBODY_BE 0x01
-#define SOMEBODY_MOVE 0x01     //数据包：有人移动
-#define SOMEBODY_STOP 0x00     //数据包：有人静止
-#define NOBODY 0x00            //数据包：无人
+#define SOMEBODY_MOVE 0x01
+#define SOMEBODY_STOP 0x00
+#define NOBODY 0x00
 
 const unsigned char cuc_CRCHi[256]= {
   0x00, 0xC1, 0x81, 0x40, 0x01, 0xC0, 0x80, 0x41, 0x01, 0xC0, 0x80, 0x41,
@@ -98,7 +98,7 @@ typedef union
   float Float;
 }Float_Byte;
 
-// 体征参数解包
+
 int radar::Bodysign_val(int ad1, int ad2, int ad3, int ad4, int ad5){
   if(ad1 == BODYSIGN){
       Float_Byte fb;
@@ -111,7 +111,7 @@ int radar::Bodysign_val(int ad1, int ad2, int ad3, int ad4, int ad5){
   return 0;
 }
 
-// 有人无人、接近远离判断
+
 void radar::Situation_judgment(int ad1, int ad2, int ad3, int ad4, int ad5){
   if(ad1 == REPORT_RADAR || ad1 == REPORT_OTHER){
         if(ad2 == ENVIRONMENT || ad2 == HEARTBEAT){
@@ -141,7 +141,7 @@ void radar::Situation_judgment(int ad1, int ad2, int ad3, int ad4, int ad5){
   }
 }
 
-// 跌倒判断
+
 void radar::Fall_judgment(int ad1, int ad2, int ad3, int ad4){
   if(ad1 == FALL_REPORT && ad2 == 0x01){
     if(ad3 == 0x01){
