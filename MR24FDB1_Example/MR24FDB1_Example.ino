@@ -39,7 +39,6 @@ void loop()
 //        Bodysign_judgment(data[5], data[6], data[7], data[8], data[9]);
         RADAR.Situation_judgment(data[5], data[6], data[7], data[8], data[9]);
         RADAR.Fall_judgment(data[4], data[5], data[6], data[7]);
-        Serial.println("------------------------");
         continue;
       }
       delay(25);

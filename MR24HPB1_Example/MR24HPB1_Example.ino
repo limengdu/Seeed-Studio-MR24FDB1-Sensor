@@ -38,7 +38,6 @@ void loop()
       if (Msg == MESSAGE_HEAD){
 //        Bodysign_judgment(data[5], data[6], data[7], data[8], data[9]);   //体征数据解码
         RADAR.Situation_judgment(data[5], data[6], data[7], data[8], data[9]);   //雷达数据解码
-        Serial.println("------------------------");
         continue;
       }
       delay(25);
