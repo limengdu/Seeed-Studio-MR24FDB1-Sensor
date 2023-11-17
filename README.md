@@ -350,8 +350,8 @@ void loop()
   datas[length+1] = crc_data & 0xff;
   Serial.print("The datas send to the radar: ");
   for (int n = 0; n < length + 2; n++){
-    char buffsend[1];
-    sprintf(buffsend, "0x%02x ", datas[n]);
+    char buffsend[8];
+    snprintf(buffsend, sizeof(buffsend), "0x%02x ", datas[n]);
     Serial.print(buffsend);
   }
   Serial.println();
